@@ -51,7 +51,7 @@ public abstract class RentalShop {
 	 * @param address
 	 * @param city
 	 */
-	public RentalShop(String name, String address, String city, String owner) {
+	protected RentalShop(String name, String address, String city, String owner) {
 		
 		this.boats = new ArrayList<>();
 		
@@ -69,7 +69,7 @@ public abstract class RentalShop {
 	 * @param city
 	 * @param boats
 	 */
-	public RentalShop(String name, String address, String city, List<Boat> boats, String owner) {
+	protected RentalShop(String name, String address, String city, List<Boat> boats, String owner) {
 		
 		this(name, address, city, owner);
 		
@@ -85,7 +85,7 @@ public abstract class RentalShop {
 	 * @param city
 	 * @param description
 	 */
-	public RentalShop(String name, String address, String city, String description, String owner) {
+	protected RentalShop(String name, String address, String city, String description, String owner) {
 		
 		this.name = name;
 		

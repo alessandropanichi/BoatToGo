@@ -7,6 +7,11 @@ import java.sql.Statement;
 
 public class CreateDatabase {
 	
+	private static final String id_bigint = "  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n";
+	private static final String engine =  "ENGINE = InnoDB;";
+	private static final String on_delete = "    ON DELETE NO ACTION\r\n";
+	private static final String on_update = "    ON UPDATE NO ACTION)\r\n";
+	
 	private static final String CREATE_DATABASE_QUERY = "CREATE SCHEMA IF NOT EXISTS `boat_to_go` DEFAULT CHARACTER SET utf8 ;";
 	
 	private static final String CREATE_TABLE_BOAT_SHOP = "CREATE TABLE IF NOT EXISTS `boat_to_go`.`boatShop` (\r\n" + 
@@ -15,56 +20,56 @@ public class CreateDatabase {
 			"  `city` VARCHAR(45) NOT NULL,\r\n" + 
 			"  `description` VARCHAR(500) NOT NULL,\r\n" + 
 			"  `owner` VARCHAR(45) NOT NULL,\r\n" + 
-			"  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n" + 
+			id_bigint + 
 			"  PRIMARY KEY (`id`))\r\n" + 
-			"ENGINE = InnoDB;";
+			engine;
 	
 	private static final String CREATE_TABLE_BOAT = "CREATE TABLE IF NOT EXISTS `boat_to_go`.`boat` (\r\n" + 
 			"  `description` VARCHAR(500) NOT NULL,\r\n" + 
 			"  `seats` SMALLINT NOT NULL,\r\n" + 
 			"  `size` SMALLINT NOT NULL,\r\n" + 
 			"  `toilets` SMALLINT NOT NULL,\r\n" + 
-			"  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n" + 
+			id_bigint + 
 			"  `boatShop_id` BIGINT UNSIGNED NOT NULL,\r\n" + 
 			"  PRIMARY KEY (`id`, `boatShop_id`),\r\n" + 
 			"  INDEX `fk_room_boatShop_idx` (`boatShop_id` ASC) VISIBLE,\r\n" + 
 			"  CONSTRAINT `fk_boat_hotel`\r\n" + 
 			"    FOREIGN KEY (`boatShop_id`)\r\n" + 
 			"    REFERENCES `boat_to_go`.`boatShop` (`id`)\r\n" + 
-			"    ON DELETE NO ACTION\r\n" + 
-			"    ON UPDATE NO ACTION)\r\n" + 
-			"ENGINE = InnoDB;";
+			on_delete + 
+			on_update + 
+			engine;
 	
 	private static final String CREATE_TABLE_BOOKING = "CREATE TABLE IF NOT EXISTS `boat_to_go`.`booking` (\r\n" + 
 			"  `check_in` DATE NOT NULL,\r\n" + 
 			"  `check_out` DATE NOT NULL,\r\n" + 
 			"  `state` ENUM('SUBMITTED', 'ACCEPTED', 'DELETED', 'INACTIVE') NOT NULL,\r\n" + 
 			"  `user` VARCHAR(45) NOT NULL,\r\n" + 
-			"  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n" + 
+			id_bigint + 
 			"  `boat_id` BIGINT UNSIGNED NOT NULL,\r\n" + 
 			"  PRIMARY KEY (`id`),\r\n" + 
 			"  INDEX `fk_booking_boat1_idx` (`boat_id` ASC) VISIBLE,\r\n" + 
 			"  CONSTRAINT `fk_booking_boat1`\r\n" + 
 			"    FOREIGN KEY (`boat_id`)\r\n" + 
 			"    REFERENCES `boat_to_go`.`boat` (`id`)\r\n" + 
-			"    ON DELETE NO ACTION\r\n" + 
-			"    ON UPDATE NO ACTION)\r\n" + 
-			"ENGINE = InnoDB;";
+			on_delete + 
+			on_update + 
+			engine;
 	
 	private static final String CREATE_TABLE_PERSON = "CREATE TABLE IF NOT EXISTS `boat_to_go`.`Person` (\r\n" + 
 			"  `fiscal_code` VARCHAR(16) NOT NULL,\r\n" + 
 			"  `first_name` VARCHAR(45) NOT NULL,\r\n" + 
 			"  `last_name` VARCHAR(45) NOT NULL,\r\n" + 
-			"  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n" + 
+			id_bigint + 
 			"  `booking_id` BIGINT UNSIGNED NOT NULL,\r\n" + 
 			"  PRIMARY KEY (`id`, `booking_id`),\r\n" + 
 			"  INDEX `fk_Person_booking1_idx` (`booking_id` ASC) VISIBLE,\r\n" + 
 			"  CONSTRAINT `fk_Person_booking1`\r\n" + 
 			"    FOREIGN KEY (`booking_id`)\r\n" + 
 			"    REFERENCES `boat_to_go`.`booking` (`id`)\r\n" + 
-			"    ON DELETE NO ACTION\r\n" + 
-			"    ON UPDATE NO ACTION)\r\n" + 
-			"ENGINE = InnoDB;";
+			on_delete + 
+			on_update + 
+			engine;
 	
 	private CreateDatabase() {}
 	

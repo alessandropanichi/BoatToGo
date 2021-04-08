@@ -30,7 +30,7 @@ public abstract class MainViewController {
 	 * @param view  the view.
 	 * @param model the model.
 	 */
-	public MainViewController(MainView view, BookBoatShopController model) {
+	protected MainViewController(MainView view, BookBoatShopController model) {
 
 		this.view = view;
 		this.model = model;
@@ -48,7 +48,7 @@ public abstract class MainViewController {
 	 * 
 	 * @param view
 	 */
-	public MainViewController(MainView view) {
+	protected MainViewController(MainView view) {
 
 		this.view = view;
 
